@@ -329,11 +329,17 @@
     <!-- Cookie (Süti) Értesítő Sáv -->
     <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 z-50 bg-gray-900 text-white p-4 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 shadow-2xl border-t border-gray-800 hidden">
         <p class="text-sm text-gray-300 text-center md:text-left max-w-4xl">
-            Weboldalunk sütiket használ a megfelelő működés és a közösségi média funkciók (pl. Instagram feed) biztosítása érdekében. Az oldal használatával elfogadod a sütik használatát.
+            Weboldalunk sütiket használ a megfelelő működés és a közösségi média funkciók (pl. Instagram feed) biztosítása érdekében. Az oldal használatával elfogadod a sütik használatát. 
+            <a href="adatvedelem.html" class="text-primary underline hover:text-primary-dark ml-1">Részletek</a>
         </p>
-        <button onclick="acceptCookies()" class="btn-primary px-6 py-2 rounded-full text-sm font-bold whitespace-nowrap shadow-md">
-            Elfogadom
-        </button>
+        <div class="flex items-center gap-3">
+            <button onclick="declineCookies()" class="px-4 py-2 rounded-full text-sm font-semibold text-gray-300 hover:text-white bg-gray-800 hover:bg-gray-700 transition whitespace-nowrap">
+                Elutasítom
+            </button>
+            <button onclick="acceptCookies()" class="btn-primary px-6 py-2 rounded-full text-sm font-bold whitespace-nowrap shadow-md">
+                Elfogadom
+            </button>
+        </div>
     </div>
 
     <!-- Footer -->
