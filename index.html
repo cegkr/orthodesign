@@ -228,15 +228,15 @@
         </div>
 
         <!-- Galéria Konténer -->
-        <div class="relative w-full max-w-7xl mx-auto px-4 flex items-center justify-center min-h-[450px]">
+        <div class="relative w-full max-w-7xl mx-auto px-6 md:px-16 flex items-center justify-center min-h-[480px]">
             
             <!-- Bal nyíl gomb -->
-            <button onclick="rotateGallery('prev')" class="absolute left-2 md:left-6 z-30 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-md transition shadow-lg focus:outline-none">
+            <button onclick="rotateGallery('prev')" class="absolute left-2 md:left-4 z-30 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur-md transition shadow-lg focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
             </button>
 
-            <!-- Elemek sávja -->
-            <div id="instaGallery" class="flex items-center justify-center gap-4 md:gap-8 transition-all duration-500 ease-in-out w-full overflow-hidden py-6">
+            <!-- Elemek sávja (fix középre igazítással) -->
+            <div id="instaGallery" class="flex items-center gap-6 overflow-x-auto scroll-smooth w-full no-scrollbar py-6 px-[50%]">
                 <!-- Elem 1: Insta 1 -->
                 <div onclick="slideToIndex(0)" class="insta-item cursor-pointer transition-all duration-500 rounded-2xl overflow-hidden shadow-2xl flex-shrink-0 w-64 md:w-80 h-80 md:h-96 opacity-40 scale-75 filter blur-[1px]">
                     <img src="insta_1.jpg" alt="Insta 1" class="w-full h-full object-cover">
@@ -268,7 +268,7 @@
             </div>
 
             <!-- Jobb nyíl gomb -->
-            <button onclick="rotateGallery('next')" class="absolute right-2 md:right-6 z-30 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-md transition shadow-lg focus:outline-none">
+            <button onclick="rotateGallery('next')" class="absolute right-2 md:right-4 z-30 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur-md transition shadow-lg focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </button>
         </div>
@@ -276,26 +276,23 @@
 
     <!-- Galéria Vezérlő Script -->
     <script>
-        let currentIndex = 3; // Kezdésként a középső elem aktív
+        let currentIndex = 3; 
         const items = document.querySelectorAll('.insta-item');
 
         function updateGallery() {
             items.forEach((item, index) => {
-                // Alapállapot (fakó, kicsi, elmosott)
                 item.classList.remove('opacity-100', 'scale-100', 'blur-0', 'z-20', 'ring-4', 'ring-primary');
                 item.classList.add('opacity-40', 'scale-75', 'filter', 'blur-[1px]');
 
-                // Ha ez a középső elem
                 if (index === currentIndex) {
                     item.classList.remove('opacity-40', 'scale-75', 'filter', 'blur-[1px]');
                     item.classList.add('opacity-100', 'scale-100', 'blur-0', 'z-20', 'ring-4', 'ring-primary');
                 }
             });
 
-            // Átrendezés a flex sávban, hogy a kiválasztott legyen középen
             const gallery = document.getElementById('instaGallery');
             const activeItem = items[currentIndex];
-            // Kiszámoljuk az eltolást, hogy középre essen
+            // Pontos középre igazítás a konténeren belül
             const offset = activeItem.offsetLeft - gallery.offsetWidth / 2 + activeItem.offsetWidth / 2;
             gallery.scrollTo({ left: offset, behavior: 'smooth' });
         }
@@ -314,7 +311,6 @@
             updateGallery();
         }
 
-        // Első betöltéskor beállítjuk a középső pozíciót
         window.addEventListener('load', () => {
             updateGallery();
         });
