@@ -356,13 +356,19 @@
     <script>
         // Cookie banner kezelése
         document.addEventListener("DOMContentLoaded", function() {
-            if (!localStorage.getItem('orthoDesignCookiesAccepted')) {
+            if (!localStorage.getItem('orthoDesignCookiesChoice')) {
                 document.getElementById('cookieBanner').classList.remove('hidden');
             }
         });
 
         function acceptCookies() {
-            localStorage.setItem('orthoDesignCookiesAccepted', 'true');
+            localStorage.setItem('orthoDesignCookiesChoice', 'accepted');
+            document.getElementById('cookieBanner').classList.add('hidden');
+            // Ide jöhetnek majd a marketing/analitikai sütik, ha lesznek
+        }
+
+        function declineCookies() {
+            localStorage.setItem('orthoDesignCookiesChoice', 'declined');
             document.getElementById('cookieBanner').classList.add('hidden');
         }
     </script>
@@ -371,10 +377,13 @@
 <div id="cookieBanner" class="hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-2xl p-4 md:p-6 transition-all duration-300">
     <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="text-sm text-gray-700 text-center md:text-left">
-            Ez a weboldal sütiket (cookie-kat) használ a felhasználói élmény fokozása érdekében. A weboldal használatával elfogadod a sütik használatát. 
+            Ez a weboldal sütiket használ a felhasználói élmény fokozása érdekében. 
             <a href="adatvedelem.html" class="text-primary underline hover:text-primary-dark ml-1">Részletek</a>
         </div>
-        <div class="flex gap-3">
+        <div class="flex items-center gap-3">
+            <button onclick="declineCookies()" class="px-4 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 transition whitespace-nowrap">
+                Elutasítom
+            </button>
             <button onclick="acceptCookies()" class="btn-primary px-6 py-2.5 rounded-full text-sm font-semibold shadow-md whitespace-nowrap">
                 Elfogadom
             </button>
